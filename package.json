@@ -1,0 +1,26 @@
+{
+  "name": "family-calendar",
+  "version": "0.0.0",
+  "description": "calendar webapp based on google's calendar api",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bobmop/family-calendar.git"
+  },
+  "keywords": [
+    "calendar",
+    "googleapi"
+  ],
+  "author": "Matthias Sauer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bobmop/family-calendar/issues"
+  },
+  "devDependencies": {
+    "googleapis": "~2.1.5",
+    "google-auth-library": "~0.9.6"
+  }
+}
