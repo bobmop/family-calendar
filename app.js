@@ -33,6 +33,25 @@ app.get('/calendar', function(req, res) {
 		}
 	});
 });
+// calendar events
+app.get('/events/:calendarId', function(req, res, next) {
+	calendar.events.list({
+		auth: app.get('google_auth'),
+		calendarId: req.params.calendarId,
+		// current Date and the next 31 days
+		timeMax: (new Date(Date.now() + (1000 * 60 * 60 * 24 * 31))).toISOString(),
+		// now
+		timeMin: (new Date()).toISOString(),
+		singleEvents: true,
+		orderBy: 'startTime'
+	}, function(err, response) {
+		if (err) {
+			next(err);
+		} else {
+			res.send(response);
+		}
+	});
+});
 
 // common error handling
 app.use(function(err, req, res, next) {
