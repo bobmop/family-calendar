@@ -22,6 +22,7 @@
   "devDependencies": {
     "googleapis": "~2.1.5",
     "google-auth-library": "~0.9.6",
-    "express": "~4.13.3"
+    "express": "~4.13.3",
+    "morgan": "~1.6.1"
   }
 }
