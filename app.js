@@ -18,6 +18,15 @@ try {
 var accessLogStream = fs.createWriteStream(logToDir + '/access.log', {flags: 'a'})
 app.use(morgan('combined', {stream: accessLogStream}));
 
+// common error handling
+app.use(function(err, req, res, next) {
+	res.status(err.code || 500);
+	res.send({
+		error: err,
+		message: err.message
+	})
+});
+
 function startServer(auth) {
 	app.set('google_auth', auth);
 	app.listen(process.env.PORT || 3000);
