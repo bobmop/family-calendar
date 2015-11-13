@@ -41,3 +41,23 @@ table {
 #calendar-next .time {
     width:20%;
 }
+#common {
+    position: fixed;
+    right: 0;
+    width: 35%;
+    height: 100%;
+    background-color: green;
+}
+#common-time {
+    padding: 30px 10px;
+    text-align: center;
+    height: 150px;
+    font-size: 7em;
+    background-color: orange;
+}
+#common-date {
+    padding: 30px 10px;
+    background-color: coral;
+    text-align: center;
+    font-size: 3.5em;
+}
