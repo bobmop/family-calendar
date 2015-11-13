@@ -1,7 +1,7 @@
 (function() {
 
     var calendars = {},
-        events = [];
+        events = {};
 
 
     function fetchCalendars() {
@@ -32,8 +32,46 @@
         });
     }
 
-    function computeEvents(events) {
-        //
+    function computeEvents(entries) {
+        if (entries.length < 1) return;
+        // get today's and next events
+        entries.forEach(function (entry) {
+            var today = new Date(),
+                d, hours, minutes, day, month, year;
+            entry.parsed = {};
+
+            if (entry.start.dateTime) {
+                d = new Date(entry.start.dateTime);
+            } else {
+                entry.parsed.wholeDay = true;
+                d = new Date(entry.start.date);
+            }
+            if (d.getDate() == today.getDate() &&
+                d.getMonth() == today.getMonth() &&
+                d.getYear() == today.getYear()) {
+                    entry.today = true;
+                } else {
+                    entry.today = false;
+                }
+
+            hours = d.getHours(),
+            minutes = d.getMinutes(),
+            day = d.getDate(),
+            month = d.getMonth() + 1,
+            // only the last two chars
+            year = ("" + d.getFullYear()).substr(2);
+
+            // 08:05
+            entry.parsed.time = entry.parsed.wholeDay ? "" :
+                            (hours < 10 ? ("0" + hours) : hours) + ":" +
+                            (minutes < 10 ? "0" + minutes : minutes);
+            // 31.01.15
+            entry.parsed.date = (day < 10 ? ("0" + day) : day) + "." +
+                                (month < 10 ? ("0" + month) : month) + "." +
+                                year;
+            entry.parsed.timestamp = d;
+            events[entry.id] = entry;
+        });
     }
 
     function createCalendar() {
