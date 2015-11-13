@@ -1,8 +1,48 @@
 (function() {
 
     var calendars = {},
-        events = {};
+        events = {},
+        templates = {
+            todayEntries: '<label>Heute</label>' +
+                            '<table>' +
+                            '<% for(var e in this.entries){ %>' +
+                                '<tr>' +
+                                    '<td class="time"><% this.entries[e].parsed.time %></td>' +
+                                    '<td><% this.entries[e].summary %></td>' +
+                                '</tr>' +
+                            '<% } %>' +
+                            '</table>',
+            nextEntries: '<label>Demn&auml;chst</label>' +
+                            '<table>' +
+                            '<% for(var e in this.entries){ %>' +
+                                '<tr>' +
+                                    '<td class="date"><% this.entries[e].parsed.date %></td>' +
+                                    '<td class="time"><% this.entries[e].parsed.time %></td>' +
+                                    '<td><% this.entries[e].summary %></td>' +
+                                '</tr>' +
+                            '<% } %>' +
+                            '</table>'
+        };
 
+    function template(html, options) {
+        var re = /<%([^%>]+)?%>/g,
+            reExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g,
+            code = 'var r=[];\n',
+            cursor = 0,
+            match;
+        var add = function(line, js) {
+            js? (code += line.match(reExp) ? line + '\n' : 'r.push(' + line + ');\n') :
+                (code += line != '' ? 'r.push("' + line.replace(/"/g, '\\"') + '");\n' : '');
+            return add;
+        }
+        while(match = re.exec(html)) {
+            add(html.slice(cursor, match.index))(match[1], true);
+            cursor = match.index + match[0].length;
+        }
+        add(html.substr(cursor, html.length - cursor));
+        code += 'return r.join("");';
+        return new Function(code.replace(/[\r\t\n]/g, '')).apply(options);
+    }
 
     function fetchCalendars() {
         return new Promise(function(fulfill, reject) {
@@ -74,6 +114,31 @@
         });
     }
 
+    function showEvents() {
+        var $todayEl = document.querySelector("#calendar-today"),
+            $nextEl = document.querySelector("#calendar-next"),
+            entries = {today: [], next: []};
+        // sort entries
+        var sorted = Object.keys(events).map(function(key) {
+            return events[key];
+        }).sort(function(a, b) {
+            return a.parsed.timestamp > b.parsed.timestamp ? 1 : -1;
+        });
+        sorted.forEach(function(entry) {
+            if (entry.today) {
+                entries.today.push(entry);
+            } else {
+                entries.next.push(entry);
+            }
+        });
+        $todayEl.innerHTML = template(templates.todayEntries, {
+            entries: entries.today
+        });
+        $nextEl.innerHTML = template(templates.nextEntries, {
+            entries: entries.next
+        });
+    }
+
     function createCalendar() {
         fetchCalendars().then(
             function(result) {
@@ -89,6 +154,11 @@
                         console.log("error fetching events for " + calendar_id);
                     }).then(function(eventsObject) {
                         computeEvents(eventsObject.items);
+                        //
+                        if (index == result.items.length - 1) {
+                            console.log("all events fetched", events);
+                            showEvents();
+                        }
                     });
                 }, Promise.resolve());
             },
