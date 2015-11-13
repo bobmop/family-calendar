@@ -173,4 +173,25 @@
 
     createCalendar();
 
+    function updateTime() {
+        var now = new Date(),
+            hours = now.getHours(),
+            minutes = now.getMinutes(),
+            day = now.getDate(),
+            month = now.getMonth() + 1,
+            year = now.getFullYear();
+
+        var formatedTime = (hours < 10 ? ("0" + hours) : hours) + ":" +
+                            (minutes < 10 ? "0" + minutes : minutes);
+        document.querySelector("#common-time").innerHTML = formatedTime;
+
+        var formatedDate = (day < 10 ? ("0" + day) : day) + "." +
+                            (month < 10 ? ("0" + month) : month) + "." +
+                            year;
+        document.querySelector("#common-date").innerHTML = formatedDate;
+
+        setTimeout(updateTime, 1000);
+    }
+    updateTime();
+
 })();
