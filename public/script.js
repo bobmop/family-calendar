@@ -36,27 +36,31 @@
         //
     }
 
-    fetchCalendars().then(
-        function(result) {
-            result.items.forEach(function(item) {
-                calendars[item.id] = item;
-            })
-            Object.keys(calendars).reduce(function(sequence, calendar_id) {
-                return sequence.then(function() {
-                    return fetchEvents(calendars[calendar_id]);
-                }, function() {
-                    // initialValue is resolved, errors could be retrieved by
-                    // fetching events from server
-                    console.log("error fetching events for " + calendar_id);
-                }).then(function(eventsObject) {
-                    computeEvents(eventsObject.items);
-                });
-            }, Promise.resolve());
-        },
-        function() {
-            console.log("error while fetching calendars");
-        }).then(function() {
-            console.log("calendars fetched");
-        });
+    function createCalendar() {
+        fetchCalendars().then(
+            function(result) {
+                result.items.forEach(function(item) {
+                    calendars[item.id] = item;
+                })
+                Object.keys(calendars).reduce(function(sequence, calendar_id) {
+                    return sequence.then(function() {
+                        return fetchEvents(calendars[calendar_id]);
+                    }, function() {
+                        // initialValue is resolved, errors could be retrieved by
+                        // fetching events from server
+                        console.log("error fetching events for " + calendar_id);
+                    }).then(function(eventsObject) {
+                        computeEvents(eventsObject.items);
+                    });
+                }, Promise.resolve());
+            },
+            function() {
+                console.log("error while fetching calendars");
+            }).then(function() {
+                console.log("calendars fetched");
+            });
+    }
+
+    createCalendar();
 
 })();
