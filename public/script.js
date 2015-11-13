@@ -42,7 +42,7 @@
                 result.items.forEach(function(item) {
                     calendars[item.id] = item;
                 })
-                Object.keys(calendars).reduce(function(sequence, calendar_id) {
+                Object.keys(calendars).reduce(function(sequence, calendar_id, index) {
                     return sequence.then(function() {
                         return fetchEvents(calendars[calendar_id]);
                     }, function() {
@@ -57,6 +57,8 @@
             function() {
                 console.log("error while fetching calendars");
             }).then(function() {
+                // recreate every 30 minutes
+                setTimeout(createCalendar, 1000 * 60 * 30);
                 console.log("calendars fetched");
             });
     }
