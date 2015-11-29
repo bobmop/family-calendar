@@ -2,11 +2,16 @@ var credentials = require('./app/credentials'),
 	express = require('express'),
 	fs = require('fs'),
 	morgan = require('morgan'),
+	livereload = require("express-livereload"),
 	google = require('googleapis'),
 	calendar = google.calendar('v3'),
 	app = express();
 
 app.use(express.static(__dirname + '/public'));
+
+livereload(app, {
+	watchDir: process.cwd() + "/public"
+});
 
 // logging
 var logToDir = __dirname + '/logs/';
