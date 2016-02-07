@@ -26,7 +26,7 @@ var accessLogStream = fs.createWriteStream(logToDir + '/access.log', {flags: 'a'
 app.use(morgan('combined', {stream: accessLogStream}));
 
 //calendar list
-app.get('/calendar', function(req, res) {
+app.get('/calendar', function(req, res, next) {
 	calendar.calendarList.list({
 		auth: app.get('google_auth'),
 		minAccessRole: 'owner'
