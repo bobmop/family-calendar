@@ -3,10 +3,13 @@ var fs = require('fs'),
     google = require('googleapis'),
     googleAuth = require('google-auth-library'),
 
+    config = {},
+
     SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'],
     TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
         process.env.USERPROFILE) + '/.credentials/',
-    GOOGLE_TOKEN_PATH = TOKEN_DIR + 'familiy-calendar-google.json';
+    GOOGLE_TOKEN_PATH = TOKEN_DIR + 'familiy-calendar-google.json',
+    WEATER_TOKEN_PATH = TOKEN_DIR + 'family-calendar-weather.config';
 
 
 /**
@@ -75,7 +78,7 @@ module.exports = function(callback) {
         console.log('Found')
     }rized client.
      */
-    function authorize(credentials, callback) {
+    function authorizeGoogle(credentials, callback) {
         var clientSecret = credentials.installed.client_secret,
             clientId = credentials.installed.client_id,
             redirectUrl = credentials.installed.redirect_uris[0],
@@ -94,14 +97,37 @@ module.exports = function(callback) {
         });
     }
 
-    // Load client secrets from a local file.
-    fs.readFile('client_secret.json', function processClientSecrets(err, content) {
-        if (err) {
-            console.log('Error loading client secret file: ' + err);
-            return;
-        }
-        // Authorize a client with the loaded credentials,
-        // run given callback on success
-        authorize(JSON.parse(content), callback);
+    function checkGoogle(callback) {
+        // Load client secrets from a local file.
+        fs.readFile('client_secret.json', function processClientSecrets(err, content) {
+            if (err) {
+                console.log('Error loading client secret file: ' + err);
+                return;
+            }
+            // Authorize a client with the loaded credentials,
+            // run given callback on success
+            authorizeGoogle(JSON.parse(content), callback);
+        });
+    }
+
+    function checkWeatherApiKey(callback) {
+        fs.readFile(WEATER_TOKEN_PATH, function(err, config) {
+            if (err) {
+                //getNewWeatherToken(callback);
+                console.log('Error loading credentials from ' + WEATER_TOKEN_PATH + '...');
+            } else {
+                console.log('Found credentials in ' + WEATER_TOKEN_PATH + '...');
+                callback(JSON.parse(config));
+            }
+        })
+    }
+
+    checkGoogle(function(cred) {
+        config.google = cred;
+        checkWeatherApiKey(function(config) {
+            config.weather = config;
+            callback(config);
+        })
     });
+
 }

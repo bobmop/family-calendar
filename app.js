@@ -1,4 +1,5 @@
 var credentials = require('./app/credentials'),
+	request = require('request'),
 	express = require('express'),
 	fs = require('fs'),
 	morgan = require('morgan'),
@@ -58,6 +59,14 @@ app.get('/events/:calendarId', function(req, res, next) {
 	});
 });
 
+app.get('/weather', function(req, res, next) {
+	var uri = 'http://api.openweathermap.org/data/2.5/forecast/city'
+			+ '?q=' + app.get('weather_config').city
+			+ '&APPID=' + app.get('weather_config').token
+	req.pipe(request.get(uri))
+	.pipe(res);
+});
+
 // common error handling
 app.use(function(err, req, res, next) {
 	res.status(err.code || 500);
@@ -67,8 +76,9 @@ app.use(function(err, req, res, next) {
 	})
 });
 
-function startServer(auth) {
-	app.set('google_auth', auth);
+function startServer(config) {
+	app.set('google_auth', config.google);
+	app.set('weather_config', config.weather);
 	app.listen(process.env.PORT || 3000);
 }
 
