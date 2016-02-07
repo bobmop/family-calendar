@@ -6,7 +6,7 @@ var fs = require('fs'),
     SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'],
     TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
         process.env.USERPROFILE) + '/.credentials/',
-    TOKEN_PATH = TOKEN_DIR + 'familiy-calendar-google.json';
+    GOOGLE_TOKEN_PATH = TOKEN_DIR + 'familiy-calendar-google.json';
 
 
 /**
@@ -25,7 +25,7 @@ module.exports = function(callback) {
      * @param {getEventsCallback} callback The callback to call with the authorized
      *     client.
      */
-    function getNewToken(oauth2Client, callback) {
+    function getNewGoogleToken(oauth2Client, callback) {
         var authUrl = oauth2Client.generateAuthUrl({
             access_type: 'offline',
             scope: SCOPES
@@ -43,7 +43,7 @@ module.exports = function(callback) {
                     return;
                 }
                 oauth2Client.credentials = token;
-                storeToken(token);
+                storeGoogleToken(token);
                 callback(oauth2Client);
             });
         });
@@ -54,7 +54,7 @@ module.exports = function(callback) {
      *
      * @param {Object} token The token to store to disk.
      */
-    function storeToken(token) {
+    function storeGoogleToken(token) {
         try {
             fs.mkdirSync(TOKEN_DIR);
         } catch (err) {
@@ -62,8 +62,8 @@ module.exports = function(callback) {
                 throw err;
             }
         }
-        fs.writeFile(TOKEN_PATH, JSON.stringify(token));
-        console.log('Token stored to ' + TOKEN_PATH);
+        fs.writeFile(GOOGLE_TOKEN_PATH, JSON.stringify(token));
+        console.log('Token stored to ' + GOOGLE_TOKEN_PATH);
     }
 
     /**
@@ -83,11 +83,11 @@ module.exports = function(callback) {
             oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
 
         // Check if we have previously stored a token.
-        fs.readFile(TOKEN_PATH, function(err, token) {
+        fs.readFile(GOOGLE_TOKEN_PATH, function(err, token) {
             if (err) {
-                getNewToken(oauth2Client, callback);
+                getNewGoogleToken(oauth2Client, callback);
             } else {
-                console.log('Found credentials in ' + TOKEN_PATH + '...');
+                console.log('Found credentials in ' + GOOGLE_TOKEN_PATH + '...');
                 oauth2Client.credentials = JSON.parse(token);
                 callback(oauth2Client);
             }
