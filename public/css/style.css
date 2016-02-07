@@ -4,9 +4,14 @@ html, body {
     height: 100%;
     font-family: "Open Sans",sans-serif;
     font-size: 14px;
+    background-color: #4A4E69;
+    color: #F2E9E4;
 }
 table {
     width: 100%;
+}
+td {
+    padding-right: 10px;
 }
 #calendar {
     position: fixed;
@@ -14,13 +19,16 @@ table {
     left: 0;
     width: 65%;
     height: 100%;
-    background-color: red;
+    background-color: #22223B;
+}
+#calendar td {
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 #calendar-today {
-    background-color: yellow;
-    min-height: 150px;
     font-size: 1.5em;
-    padding: 30px 10px;
+    padding: 30px 10px 0;
 }
 #calendar-today table {
     font-size: 2em;
@@ -28,15 +36,18 @@ table {
 #calendar-today .time {
     width: 30%;
 }
+#calendar-today .empty {
+    padding-left: 30px;
+}
 #calendar-next {
     font-size: 1.5em;
-    padding: 30px 10px;
+    padding: 0 10px;
 }
 #calendar-next table {
     font-size: 1.5em;
 }
 #calendar-next .date {
-    width: 30%;
+    width: 20%;
 }
 #calendar-next .time {
     width:20%;
@@ -46,18 +57,14 @@ table {
     right: 0;
     width: 35%;
     height: 100%;
-    background-color: green;
 }
-#common-time {
-    padding: 30px 10px;
+#common .time {
+    padding: 30px 10px 0;
     text-align: center;
-    height: 150px;
-    font-size: 7em;
-    background-color: orange;
+    font-size: 6em;
 }
-#common-date {
-    padding: 30px 10px;
-    background-color: coral;
+#common .date {
+    padding: 0 10px;
     text-align: center;
-    font-size: 3.5em;
+    font-size: 3em;
 }

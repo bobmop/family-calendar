@@ -1,0 +1,16 @@
+<label>Heute</label>
+<table>
+<%
+if (events.length) {
+    _.each(events, function(event) {
+%>
+    <tr data-id="<%= event.id %>">
+        <td class="time"><%= event.get("time") %></td>
+        <td><%- event.get("summary") %></td>
+    </tr>
+
+<%
+    })
+}
+%>
+</table>

@@ -3,49 +3,12 @@
 	<head>
 		<title>Family calendar</title>
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-		<link href="style.css" type="text/css" rel="stylesheet">
+		<link href="css/style.css" type="text/css" rel="stylesheet">
+		<link href="lib/font-awesome/css/font-awesome.css" type="text/css" rel="stylesheet">
 		<script src="//localhost:35729/livereload.js"></script>
+		<script data-main="js/main" src="lib/requirejs/require.js"></script>
 	</head>
 	<body>
-		<section id="calendar">
-			<section id="calendar-today">
-				<label>Heute</label>
-				<table>
-					<tr>
-						<td class="time">18:00</td>
-						<td>Elternabend</td>
-					</tr>
-				</table>
-			</section>
-
-			<section id="calendar-next">
-				<label>Demn&auml;chst</label>
-				<table>
-					<tr>
-						<td class="date">13.01.15</td>
-						<td class="time">08:00</td>
-						<td>Lidl</td>
-					</tr>
-					<tr>
-						<td class="date">13.01.15</td>
-						<td class="time">08:00</td>
-						<td>Lidl</td>
-					</tr>
-					<tr>
-						<td class="date">13.01.15</td>
-						<td class="time">08:00</td>
-						<td>Lidl</td>
-					</tr>
-				</table>
-			</section>
-		</section>
-		<section id="common">
-			<section id="common-time">
-			</section>
-			<section id="common-date">
-			</section>
-		</section>
-
-		<script type='text/javascript' src="script.js"></script>
+		<div id="main"></div>
 	</body>
 </html>
