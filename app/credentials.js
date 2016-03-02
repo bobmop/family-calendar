@@ -74,9 +74,7 @@ module.exports = function(callback) {
      * given callback function.
      *
      * @param {Object} credentials The authorization client credentials.
-     * @param {function} callback The callback to call with the autho else {
-        console.log('Found')
-    }rized client.
+     * @param {function} callback The callback to call with the authorized client.
      */
     function authorizeGoogle(credentials, callback) {
         var clientSecret = credentials.installed.client_secret,
