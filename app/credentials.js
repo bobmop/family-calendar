@@ -122,10 +122,10 @@ module.exports = function(callback) {
         })
     }
 
-    checkGoogle(function(cred) {
-        config.google = cred;
-        checkWeatherApiKey(function(config) {
-            config.weather = config;
+    checkGoogle(function(google_cred) {
+        config.google = google_cred;
+        checkWeatherApiKey(function(weather_config) {
+            config.weather = weather_config;
             callback(config);
         })
     });
