@@ -8,7 +8,7 @@ var fs = require('fs'),
     SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'],
     TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
         process.env.USERPROFILE) + '/.credentials/',
-    GOOGLE_TOKEN_PATH = TOKEN_DIR + 'familiy-calendar-google.json',
+    GOOGLE_TOKEN_PATH = TOKEN_DIR + 'family-calendar-google.json',
     WEATER_TOKEN_PATH = TOKEN_DIR + 'family-calendar-weather.config';
 
 
