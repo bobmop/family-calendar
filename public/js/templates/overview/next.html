@@ -2,10 +2,18 @@
 <table>
 <%
 if (events.length) {
+    var lastDate;
     _.each(events, function(event) {
+        var currentDate = event.get("day") + "." + event.get("month"),
+            eventDate = "";
+
+        if (lastDate != currentDate) {
+            lastDate = currentDate;
+            eventDate = lastDate;
+        }
 %>
     <tr data-id="<%= event.id %>">
-        <td class="date"><%= event.get("day") %>.<%= event.get("month") %></td>
+        <td class="date"><%= eventDate %></td>
         <td class="time"><%= event.get("time") %></td>
         <td><%- event.get("summary") %></td>
     </tr>
