@@ -1,20 +1,18 @@
 <label>Heute</label>
-<table>
 <%
 if (events.length) {
     _.each(events, function(event) {
 %>
-    <tr data-id="<%= event.id %>">
-        <td class="time"><%= event.get("time") %></td>
-        <td><%- event.get("summary") %></td>
-    </tr>
+    <div data-id="<%= event.id %>">
+        <div class="time"><%= event.get("time") %></div>
+        <div class="summary"><%- event.get("summary") %></div>
+    </div>
 
 <%
     })
 } else {
 %>
-<tr><td>Keine Termine</td></tr>
+<div class="empty">Keine Termine</div>
 <%
 }
 %>
-</table>

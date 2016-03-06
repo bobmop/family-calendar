@@ -36,6 +36,7 @@ define([
             data.day = day < 10 ? ("0" + day) : day;
             data.month = month < 10 ? ("0" + month) : month;
             data.year = year;
+            data.timestamp = d.getTime();
             return data;
         }
     });
