@@ -46,7 +46,15 @@ define([
                         url: "/events/" + calendar.id
                     })
                     .done(_.bind(function(events) {
-                        this.add(events.items, {parse: true});
+                        // add some info
+                        var items = _.each(events.items, function(item) {
+                            item.calendarId = calendar.id;
+                        });
+                        // remove all items of the current calendar
+                        this.remove(this.models.filter(function(model) {
+                            return model.get("calendarId") === calendar.id;
+                        }));
+                        this.add(items, {parse: true});
                     }, this))
                     .always(_.bind(function() {
                         calendarsDone++;
