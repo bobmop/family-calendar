@@ -47,10 +47,16 @@ td {
     font-size: 1.5em;
 }
 #calendar-next .date {
-    width: 20%;
+    font-size: 0.7em;
 }
 #calendar-next .time {
+    float: left;
     width:20%;
+}
+#calendar-next .summary {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 #common {
     position: fixed;

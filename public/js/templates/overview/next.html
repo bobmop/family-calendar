@@ -2,26 +2,31 @@
 <table>
 <%
 if (events.length) {
-    var lastDate;
-    _.each(events, function(event) {
-        var currentDate = event.get("day") + "." + event.get("month"),
-            eventDate = "";
+    var eventsToShow = _.groupBy(events, function(model) {
+        return new Date(model.get("year"), model.get("month"), model.get("day")).getTime();
+    });
 
-        if (lastDate != currentDate) {
-            lastDate = currentDate;
-            eventDate = lastDate;
-        }
+    _.each(eventsToShow, function(eventsByDay, eventDate) {
+        var eventDateToTime = new Date(Number(eventDate));
 %>
-    <tr data-id="<%= event.id %>">
-        <td class="date"><%= eventDate %></td>
-        <% if (event.get("time")) { %>
-            <td class="time"><%= event.get("time") %></td>
-            <td><%- event.get("summary") %></td>
-        <% } else { %>
-            <td colspan="2"><%- event.get("summary") %></td>
-        <% } %>
-    </tr>
 
+    <div class="events-by-day">
+        <div class="date">
+            <%- ("0" + eventDateToTime.getDate()).slice(-2) %>
+            .
+            <%- ("0" + (eventDateToTime.getMonth()+1)).slice(-2) %>
+        </div>
+
+        <% _.each(eventsByDay, function(event) { %>
+        <div data-id="<%= event.id %>">
+            <% if (event.get("time")) { %>
+                <div class="time"><%= event.get("time") %></div>
+            <% } %>
+            <div class="summary"><%- event.get("summary") %></div>
+        </div>
+        <% }) %>
+
+    </div>
 <%
     })
 }

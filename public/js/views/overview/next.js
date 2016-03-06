@@ -14,6 +14,7 @@ define([
         },
         render: function() {
             this.$el.html(this._template({
+                _: _,
                 events: _.filter(this.collection.models, function(model) {
                     return !model.get("today");
                 }).slice(0, 5) // just the first 5 events

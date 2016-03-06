@@ -25,9 +25,9 @@ define([
             hours = d.getHours(),
             minutes = d.getMinutes(),
             day = d.getDate(),
-            month = d.getMonth() + 1,
+            month = d.getMonth(),
             // only the last two chars
-            year = ("" + d.getFullYear()).substr(2);
+            year = d.getFullYear();
 
             // 08:05
             data.time = data.wholeDay ? "" :
@@ -36,11 +36,6 @@ define([
             data.day = day < 10 ? ("0" + day) : day;
             data.month = month < 10 ? ("0" + month) : month;
             data.year = year;
-            // 31.01.15
-            data.date = data.day + "." +
-                            data.month + "." +
-                            data.year;
-            data.timestamp = d;
             return data;
         }
     });
