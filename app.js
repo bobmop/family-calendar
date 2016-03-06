@@ -28,34 +28,40 @@ app.use(morgan('combined', {stream: accessLogStream}));
 
 //calendar list
 app.get('/calendar', function(req, res, next) {
-	calendar.calendarList.list({
-		auth: app.get('google_auth'),
-		minAccessRole: 'owner'
-	}, function(err, response) {
-		if (err) {
-			next(err);
-		} else {
-			res.send(response);
-		}
+	var g = app.get('google_auth');
+	g.getAccessToken(function() {
+		calendar.calendarList.list({
+			auth: g,
+			minAccessRole: 'owner'
+		}, function(err, response) {
+			if (err) {
+				next(err);
+			} else {
+				res.send(response);
+			}
+		});
 	});
 });
 // calendar events
 app.get('/events/:calendarId', function(req, res, next) {
-	calendar.events.list({
-		auth: app.get('google_auth'),
-		calendarId: req.params.calendarId,
-		// current Date and the next 31 days
-		timeMax: (new Date(Date.now() + (1000 * 60 * 60 * 24 * 31))).toISOString(),
-		// now
-		timeMin: (new Date()).toISOString(),
-		singleEvents: true,
-		orderBy: 'startTime'
-	}, function(err, response) {
-		if (err) {
-			next(err);
-		} else {
-			res.send(response);
-		}
+	var g = app.get('google_auth');
+	g.getAccessToken(function() {
+		calendar.events.list({
+			auth: g,
+			calendarId: req.params.calendarId,
+			// current Date and the next 31 days
+			timeMax: (new Date(Date.now() + (1000 * 60 * 60 * 24 * 31))).toISOString(),
+			// now
+			timeMin: (new Date()).toISOString(),
+			singleEvents: true,
+			orderBy: 'startTime'
+		}, function(err, response) {
+			if (err) {
+				next(err);
+			} else {
+				res.send(response);
+			}
+		});
 	});
 });
 
