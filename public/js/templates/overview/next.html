@@ -18,7 +18,7 @@ if (events.length) {
         </div>
 
         <% _.each(eventsByDay, function(event) { %>
-        <div data-id="<%= event.id %>">
+        <div data-id="<%= event.id %>" style="color: <%- event.get('color') %>">
             <% if (event.get("time")) { %>
                 <div class="time"><%= event.get("time") %></div>
             <% } %>

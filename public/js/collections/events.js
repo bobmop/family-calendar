@@ -49,6 +49,7 @@ define([
                         // add some info
                         var items = _.each(events.items, function(item) {
                             item.calendarId = calendar.id;
+                            item.color = calendar.get("backgroundColor");
                         });
                         // remove all items of the current calendar
                         this.remove(this.models.filter(function(model) {
