@@ -14,8 +14,12 @@ if (events.length) {
 %>
     <tr data-id="<%= event.id %>">
         <td class="date"><%= eventDate %></td>
-        <td class="time"><%= event.get("time") %></td>
-        <td><%- event.get("summary") %></td>
+        <% if (event.get("time")) { %>
+            <td class="time"><%= event.get("time") %></td>
+            <td><%- event.get("summary") %></td>
+        <% } else { %>
+            <td colspan="2"><%- event.get("summary") %></td>
+        <% } %>
     </tr>
 
 <%
