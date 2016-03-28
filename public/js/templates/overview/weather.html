@@ -1,0 +1,35 @@
+<div class="main">
+    <%= main.temp %>°C
+    <img src="http://openweathermap.org/img/w/<%= weather[0].icon %>.png">
+</div>
+
+<table>
+    <tr>
+        <td class="label">Wolken</td>
+        <td class="value"><%= clouds.all %> %</td>
+    </tr>
+    <tr>
+        <td class="label">Luftfeuchtigkeit</td>
+        <td class="value"><%= main.humidity %> %</td>
+    </tr>
+    <tr>
+        <td class="label">Druck</td>
+        <td class="value"><%= main.pressure %> hPa</td>
+    </tr>
+    <tr>
+        <td class="label">Windgeschwindigkeit</td>
+        <td class="value"><%= wind.speed %> m/s</td>
+    </tr>
+    <tr>
+        <td class="label">Windgerichtung</td>
+        <td class="value"><%= wind.deg %> °</td>
+    </tr>
+    <tr>
+        <td class="label">Sonnenaufgang</td>
+        <td class="value"><%= sys.sunrise.toLocaleTimeString() %> Uhr</td>
+    </tr>
+    <tr>
+        <td class="label">Sonnenuntergang</td>
+        <td class="value"><%= sys.sunset.toLocaleTimeString() %> Uhr</td>
+    </tr>
+</table>

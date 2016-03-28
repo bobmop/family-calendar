@@ -66,8 +66,9 @@ app.get('/events/:calendarId', function(req, res, next) {
 });
 
 app.get('/weather', function(req, res, next) {
-	var uri = 'http://api.openweathermap.org/data/2.5/forecast/city'
-			+ '?q=' + app.get('weather_config').city
+	var uri = 'http://api.openweathermap.org/data/2.5/weather'
+			+ '?id=' + app.get('weather_config').id
+			+ '&units=metric'
 			+ '&APPID=' + app.get('weather_config').token
 	req.pipe(request.get(uri))
 	.pipe(res);
