@@ -26,10 +26,14 @@
     </tr>
     <tr>
         <td class="label">Sonnenaufgang</td>
-        <td class="value"><%= sys.sunrise.toLocaleTimeString() %> Uhr</td>
+        <td class="value"><%= sys.sunrise.toLocaleTimeString("de-DE", {
+            hour12: false
+        }) %> Uhr</td>
     </tr>
     <tr>
         <td class="label">Sonnenuntergang</td>
-        <td class="value"><%= sys.sunset.toLocaleTimeString() %> Uhr</td>
+        <td class="value"><%= sys.sunset.toLocaleTimeString("de-DE", {
+            hour12: false
+        }) %> Uhr</td>
     </tr>
 </table>
