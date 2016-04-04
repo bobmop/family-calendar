@@ -73,11 +73,14 @@ label {
 #common-weather .meta {
     color: #888;
     display: inline-block;
-    font-size: 24px;
+    font-size: 20px;
     margin-right: 20px;
     margin-top: 20px;
 }
 #common-weather .meta .wi {
     font-size: 40px;
     margin-right: 10px;
+}
+#common-weather .meta.wind {
+    width: 100%;
 }

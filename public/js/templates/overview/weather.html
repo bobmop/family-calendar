@@ -14,6 +14,11 @@
     <%= Math.round(main.pressure/1000) %> bar
 </div>
 
+<div class="meta wind">
+    <i class="wi wi-wind from-<%= wind.deg %>-deg"></i>
+    <i class="wi wi-wind-beaufort-<%- Math.round(Math.pow((wind.speed / 0.836), 2/3)) %>"></i>
+</div>
+
 <div class="meta sunrise">
     <i class="wi wi-sunrise"></i>
     <%- moment(sys.sunrise).format("HH:mm") %>
@@ -24,7 +29,3 @@
     <%- moment(sys.sunset).format("HH:mm") %>
 </div>
 
-<div class="meta wind">
-    <i class="wi wi-wind from-<%= wind.deg %>-deg"></i>
-    <i class="wi wi-wind-beaufort-<%- Math.round(Math.pow((wind.speed / 0.836), 2/3)) %>"></i>
-</div>
