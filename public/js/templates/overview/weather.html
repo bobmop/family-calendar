@@ -1,39 +1,30 @@
 <div class="main">
-    <%= main.temp %>°C
-    <i class="wi wi-owm-<%-dayTime %>-<%= weather[0].id %>"></i>
+    <i class="wi wi-thermometer"></i>
+    <%= main.temp %><i class="wi wi-celsius"></i>
+    <i class="icon wi wi-owm-<%-dayTime %>-<%= weather[0].id %>"></i>
 </div>
 
-<table>
-    <tr>
-        <td class="label">Wolken</td>
-        <td class="value"><%= clouds.all %> %</td>
-    </tr>
-    <tr>
-        <td class="label">Luftfeuchtigkeit</td>
-        <td class="value"><%= main.humidity %> %</td>
-    </tr>
-    <tr>
-        <td class="label">Druck</td>
-        <td class="value"><%= main.pressure %> hPa</td>
-    </tr>
-    <tr>
-        <td class="label">Windgeschwindigkeit</td>
-        <td class="value"><%= wind.speed %> m/s</td>
-    </tr>
-    <tr>
-        <td class="label">Windgerichtung</td>
-        <td class="value"><%= wind.deg %> °</td>
-    </tr>
-    <tr>
-        <td class="label">Sonnenaufgang</td>
-        <td class="value"><%= sys.sunrise.toLocaleTimeString("de-DE", {
-            hour12: false
-        }) %> Uhr</td>
-    </tr>
-    <tr>
-        <td class="label">Sonnenuntergang</td>
-        <td class="value"><%= sys.sunset.toLocaleTimeString("de-DE", {
-            hour12: false
-        }) %> Uhr</td>
-    </tr>
-</table>
+<div class="meta humidity">
+    <i class="wi wi-humidity"></i>
+    <%= main.humidity %> %
+</div>
+
+<div class="meta pressure">
+    <i class="wi wi-barometer"></i>
+    <%= Math.round(main.pressure/1000) %> bar
+</div>
+
+<div class="meta sunrise">
+    <i class="wi wi-sunrise"></i>
+    <%- moment(sys.sunrise).format("HH:mm") %>
+</div>
+
+<div class="meta sunset">
+    <i class="wi wi-sunset"></i>
+    <%- moment(sys.sunset).format("HH:mm") %>
+</div>
+
+<div class="meta wind">
+    <i class="wi wi-wind from-<%= wind.deg %>-deg"></i>
+    <i class="wi wi-wind-beaufort-<%- Math.round(Math.pow((wind.speed / 0.836), 2/3)) %>"></i>
+</div>

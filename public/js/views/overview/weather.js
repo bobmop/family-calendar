@@ -22,7 +22,8 @@ define([
         render: function() {
             if (this.model.get("main")) {
                 this.$el.html(this._template(_.extend(this.model.toJSON(), {
-                    dayTime: moment().isBetween(this.model.get("sunrise"), this.model.get("sunset")) ? "day" : "night"
+                    dayTime: moment().isBetween(this.model.get("sunrise"), this.model.get("sunset")) ? "day" : "night",
+                    moment: moment
                 })));
             } else {
                 this.$el.html(_.template(loadingTpl)());
