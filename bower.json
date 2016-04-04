@@ -28,6 +28,7 @@
     "requirejs": "^2.1.22",
     "text": "requirejs-text#^2.0.14",
     "font-awesome": "fontawesome#^4.5.0",
-    "weather-icons": "^2.0.10"
+    "weather-icons": "^2.0.10",
+    "moment": "^2.12.0"
   }
 }
