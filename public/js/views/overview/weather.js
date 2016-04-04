@@ -1,9 +1,13 @@
 define([
+    "underscore",
     "backbone",
+    "moment",
     "text!templates/overview/weather.html",
     "text!templates/common/loading.html"
 ], function(
+    _,
     Backbone,
+    moment,
     tpl,
     loadingTpl
 ) {
@@ -17,7 +21,9 @@ define([
 
         render: function() {
             if (this.model.get("main")) {
-                this.$el.html(this._template(this.model.toJSON()));
+                this.$el.html(this._template(_.extend(this.model.toJSON(), {
+                    dayTime: moment().isBetween(this.model.get("sunrise"), this.model.get("sunset")) ? "day" : "night"
+                })));
             } else {
                 this.$el.html(_.template(loadingTpl)());
             }
