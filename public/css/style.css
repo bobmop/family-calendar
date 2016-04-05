@@ -34,7 +34,7 @@ label {
 }
 #calendar .time {
     float: left;
-    width:20%;
+    width:30%;
 }
 #calendar .summary {
     white-space: nowrap;

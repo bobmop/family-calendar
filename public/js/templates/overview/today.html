@@ -3,8 +3,10 @@
 if (events.length) {
     _.each(events, function(event) {
 %>
-    <div data-id="<%= event.id %>">
-        <div class="time"><%= event.get("time") %></div>
+    <div data-id="<%= event.id %>" style="color: <%- event.get('color') %>">
+		<% if (!event.get("wholeDay")) { %>
+        <div class="time"><%= moment(event.get("start")).format("HH:mm") %></div>
+		<% } %>
         <div class="summary"><%- event.get("summary") %></div>
     </div>
 

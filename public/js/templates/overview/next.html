@@ -3,7 +3,7 @@
 <%
 if (events.length) {
     var eventsToShow = _.groupBy(events, function(model) {
-        return new Date(model.get("year"), model.get("month"), model.get("day")).getTime();
+        return moment(model.get("start")).format("DD.MM.YYYY");
     });
 
     _.each(eventsToShow, function(eventsByDay, eventDate) {
@@ -12,15 +12,15 @@ if (events.length) {
 
     <div class="events-by-day">
         <div class="date">
-            <%- ("0" + eventDateToTime.getDate()).slice(-2) %>
-            .
-            <%- ("0" + (eventDateToTime.getMonth()+1)).slice(-2) %>
+			<%- moment(eventDate, "DD.MM.YYYY").format("DD.MM") %>
         </div>
 
         <% _.each(eventsByDay, function(event) { %>
         <div data-id="<%= event.id %>" style="color: <%- event.get('color') %>">
-            <% if (event.get("time")) { %>
-                <div class="time"><%= event.get("time") %></div>
+            <% if (!event.get("wholeDay")) { %>
+                <div class="time">
+					<%= moment(event.get("start")).format("HH:mm") %> - <%= moment(event.get("end")).format("HH:mm") %>
+				</div>
             <% } %>
             <div class="summary"><%- event.get("summary") %></div>
         </div>
