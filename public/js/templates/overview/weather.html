@@ -11,7 +11,7 @@
 
 <div class="meta pressure">
     <i class="wi wi-barometer"></i>
-    <%= Math.round(main.pressure/1000) %> bar
+    <%= main.pressure %> hPa
 </div>
 
 <div class="meta wind">
@@ -28,4 +28,3 @@
     <i class="wi wi-sunset"></i>
     <%- moment(sys.sunset).format("HH:mm") %>
 </div>
-
