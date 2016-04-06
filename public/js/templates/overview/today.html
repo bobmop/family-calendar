@@ -5,7 +5,19 @@ if (events.length) {
 %>
     <div data-id="<%= event.id %>" style="color: <%- event.get('color') %>">
 		<% if (!event.get("wholeDay")) { %>
-        <div class="time"><%= moment(event.get("start")).format("HH:mm") %></div>
+        <div class="time">
+			<%
+			var start = moment(event.get("start")),
+				end = moment(event.get("end")),
+				now = moment();
+
+			if (now.isSame(start, "day")) {
+				print("&nbsp;&nbsp;" + start.format("HH:mm"));
+			} else if (now.isSame(end, "day")) {
+				print("- " + end.format("HH:mm"));
+			}
+			%>
+		</div>
 		<% } %>
         <div class="summary"><%- event.get("summary") %></div>
     </div>

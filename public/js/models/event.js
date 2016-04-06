@@ -8,11 +8,14 @@ define([
     return Backbone.Model.extend({
         parse: function(data) {
 
+			var now = moment();
+
             if (data.start.dateTime) {
                 data.start = data.start.dateTime;
             } else {
-                data.wholeDay = true;
                 data.start = data.start.date;
+				// no start time -> whole day event
+				data.wholeDay = true;
             }
 
 			if (data.end.dateTime) {
@@ -21,7 +24,11 @@ define([
 				data.end = data.end.date;
 			}
 
-			if (moment().isBetween(data.start, data.end)) {
+			if (now.isAfter(data.start, "day") && now.isBefore(data.end, "day")) {
+				data.wholeDay = true;
+			}
+
+			if (now.isSame(data.start, "day") || now.isBetween(data.start, data.end)) {
                 data.today = true;
             } else {
                 data.today = false;
