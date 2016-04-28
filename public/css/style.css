@@ -7,6 +7,17 @@ html, body {
     background-color: #272727;
     color: #ADADAD;
 }
+#wifi {
+	position: fixed;
+	right: 10px;
+	top: 5px;
+	z-index: 25;
+	font-size: 30px;
+	color: red;
+}
+#wifi.ok {
+	color: green;
+}
 label {
     font-size: 18px;
 }

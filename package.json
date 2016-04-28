@@ -26,5 +26,8 @@
     "googleapis": "~2.1.5",
     "morgan": "~1.6.1",
     "request": "^2.69.0"
+  },
+  "dependencies": {
+    "is-online": "^5.1.1"
   }
 }

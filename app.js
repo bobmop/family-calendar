@@ -6,6 +6,7 @@ var credentials = require('./app/credentials'),
 	livereload = require("express-livereload"),
 	google = require('googleapis'),
 	calendar = google.calendar('v3'),
+	isOnline = require('is-online'),
 	app = express();
 
 app.use(express.static(__dirname + '/public'));
@@ -25,6 +26,17 @@ try {
 }
 var accessLogStream = fs.createWriteStream(logToDir + '/access.log', {flags: 'a'})
 app.use(morgan('combined', {stream: accessLogStream}));
+
+// online status
+app.get('/online', function(req, res, next) {
+	isOnline(function(err, online) {
+		if (err) {
+			next(err);
+		} else {
+			res.json({online: online});
+		}
+	})
+});
 
 //calendar list
 app.get('/calendar', function(req, res, next) {
