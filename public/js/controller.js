@@ -16,7 +16,7 @@ define([
 		}).done(function(data)  {
 			$("#wifi").toggleClass("ok", data.online);
 		});
-	}, 5000);
+	}, 10000);
 
     return {
         overview: function() {
