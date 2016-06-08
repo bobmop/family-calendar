@@ -2,6 +2,8 @@ var credentials = require('./app/credentials'),
 	request = require('request'),
 	express = require('express'),
 	fs = require('fs'),
+	path = require("path"),
+	FileStreamRotator = require('file-stream-rotator'),
 	morgan = require('morgan'),
 	livereload = require("express-livereload"),
 	google = require('googleapis'),
@@ -24,7 +26,12 @@ try {
 		throw e;
 	}
 }
-var accessLogStream = fs.createWriteStream(logToDir + '/access.log', {flags: 'a'})
+var accessLogStream = FileStreamRotator.getStream({
+	date_format: 'YYYYMMDD',
+	filename: path.join(logToDir, '/access-%DATE%.log'),
+	frequency: 'daily',
+	verbose: false
+})
 app.use(morgan('combined', {stream: accessLogStream}));
 
 // online status
