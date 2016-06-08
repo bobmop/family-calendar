@@ -66,7 +66,6 @@ define([
                 }, this), _.bind(function() {
                     // initialValue is resolved, errors could be retrieved by
                     // fetching events from server
-                    console.log("error fetching events for " + calendar.id);
                     this.trigger("fetch:error", calendar.id);
                 }));
             }, Promise.resolve(), this);

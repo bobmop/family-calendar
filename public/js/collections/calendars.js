@@ -27,7 +27,6 @@ define([
                 setTimeout(_.bind(function() {
                     this.fetch();
                 }, this), 1000 * 60 * 5);
-                console.log("calendars fetched");
             }, this));
         }
     });

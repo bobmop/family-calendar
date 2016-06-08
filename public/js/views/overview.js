@@ -52,10 +52,7 @@ define([
         },
 
         fetchEvents: function() {
-            this.events.fetch()
-                .done(_.bind(function() {
-                    console.log("events", this.events.models);
-                }, this));
+            this.events.fetch();
         },
 
         showEvents: function() {
