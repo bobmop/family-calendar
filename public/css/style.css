@@ -7,6 +7,11 @@ html, body {
     background-color: #272727;
     color: #ADADAD;
 }
+/* night mode */
+.night {
+    opacity: .6;
+}
+
 #wifi {
 	position: fixed;
 	right: 10px;

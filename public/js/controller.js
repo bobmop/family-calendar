@@ -1,13 +1,23 @@
 define([
     "jquery",
     "backbone",
+    "moment",
     "views/overview"
 ], function(
     $,
     Backbone,
+    moment,
     OverView
 ) {
     var overView = new OverView();
+
+    function isNight() {
+        var now = moment().hour();
+        $("body").toggleClass("night", now >= 22 || now < 6);
+        setTimeout(isNight, 1000 * 60);
+    }
+
+    isNight();
 
 	setInterval(function() {
 		$.ajax({
