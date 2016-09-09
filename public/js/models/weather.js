@@ -12,10 +12,14 @@ define([
 
         parse: function(data) {
 
-            data.sys.sunrise = new Date(data.sys.sunrise * 1000);
-            data.sys.sunset = new Date(data.sys.sunset * 1000);
+            try {
+                data.sys.sunrise = new Date(data.sys.sunrise * 1000);
+                data.sys.sunset = new Date(data.sys.sunset * 1000);
 
-            return data;
+                return data;
+            } catch (e) {
+                return this.attributes;
+            }
         },
 
         fetch: function() {
