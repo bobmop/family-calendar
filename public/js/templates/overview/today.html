@@ -4,21 +4,21 @@ if (events.length) {
     _.each(events, function(event) {
 %>
     <div data-id="<%= event.id %>" style="color: <%- event.get('color') %>">
-		<% if (!event.get("wholeDay")) { %>
+        <% if (!event.get("wholeDay")) { %>
         <div class="time">
-			<%
-			var start = moment(event.get("start")),
-				end = moment(event.get("end")),
-				now = moment();
+            <%
+            var start = moment(event.get("start")),
+                end = moment(event.get("end")),
+                now = moment();
 
-			if (now.isSame(start, "day")) {
-				print("&nbsp;&nbsp;" + start.format("HH:mm"));
-			} else if (now.isSame(end, "day")) {
-				print("- " + end.format("HH:mm"));
-			}
-			%>
-		</div>
-		<% } %>
+            if (now.isSame(start, "day")) {
+                print("&nbsp;&nbsp;" + start.format("HH:mm"));
+            } else if (now.isSame(end, "day")) {
+                print("- " + end.format("HH:mm"));
+            }
+            %>
+        </div>
+        <% } %>
         <div class="summary"><%- event.get("summary") %></div>
     </div>
 

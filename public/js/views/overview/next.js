@@ -19,7 +19,7 @@ define([
                 _: _,
                 events: _.filter(this.collection.models, function(model) {
                     return !model.get("today");
-                }).slice(0, 8), // just the first 5 events
+                }).slice(0, 8), // just the first 8 events
 				moment: moment
             }))
             return this;

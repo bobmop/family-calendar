@@ -1,12 +1,12 @@
 define([
     "underscore",
     "backbone",
-	"moment",
+    "moment",
     "text!templates/overview/today.html"
 ], function(
     _,
     Backbone,
-	moment,
+    moment,
     tpl
 ) {
     return Backbone.View.extend({
@@ -19,7 +19,7 @@ define([
                 events: _.filter(this.collection.models, function(model) {
                     return model.get("today");
                 }),
-				moment: moment
+                moment: moment
             }))
             return this;
         }

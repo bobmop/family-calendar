@@ -23,7 +23,7 @@ define([
                 this.trigger("fetch:error");
             }, this))
             .always(_.bind(function() {
-                // recreate every 30 minutes
+                // recreate every 5 minutes
                 setTimeout(_.bind(function() {
                     this.fetch();
                 }, this), 1000 * 60 * 5);

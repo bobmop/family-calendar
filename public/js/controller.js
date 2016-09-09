@@ -19,14 +19,14 @@ define([
 
     isNight();
 
-	setInterval(function() {
-		$.ajax({
-			url: '/online',
-			dataType: "json"
-		}).done(function(data)  {
-			$("#wifi").toggleClass("ok", data.online);
-		});
-	}, 10000);
+    setInterval(function() {
+        $.ajax({
+            url: '/online',
+            dataType: "json"
+        }).done(function(data)  {
+            $("#wifi").toggleClass("ok", data.online);
+        });
+    }, 10000);
 
     return {
         overview: function() {

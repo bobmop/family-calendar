@@ -3,21 +3,21 @@ require.config({
         "jquery": "../lib/jquery/dist/jquery",
         "underscore": "../lib/underscore/underscore",
         "backbone": "../lib/backbone/backbone",
-		"text": "../lib/text/text",
+        "text": "../lib/text/text",
         "moment": "../lib/moment/moment"
     }
 });
 
 require([
-	"backbone",
-	"router"
+    "backbone",
+    "router"
 ], function(
-	Backbone,
-	Router
+    Backbone,
+    Router
 ) {
 
-	$(document).ready(function() {
-		Backbone.history.start();
-		var router = new Router();
-	});
+    $(document).ready(function() {
+        Backbone.history.start();
+        var router = new Router();
+    });
 });
