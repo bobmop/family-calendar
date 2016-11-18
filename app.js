@@ -5,6 +5,7 @@ var credentials = require('./app/credentials'),
 	path = require("path"),
 	FileStreamRotator = require('file-stream-rotator'),
 	morgan = require('morgan'),
+	syslog = require('modern-syslog'),
 	livereload = require("express-livereload"),
 	google = require('googleapis'),
 	calendar = google.calendar('v3'),
@@ -26,13 +27,11 @@ try {
 		throw e;
 	}
 }
-var accessLogStream = FileStreamRotator.getStream({
-	date_format: 'YYYYMMDD',
-	filename: path.join(logToDir, '/access-%DATE%.log'),
-	frequency: 'daily',
-	verbose: false
-})
-app.use(morgan('combined', {stream: accessLogStream}));
+syslog.open('calendar', syslog.option.LOG_CONS | syslog.option.LOG_PID,
+		syslog.facility.LOG_LOCAL4);
+app.use(morgan('combined', {
+	stream: new syslog.Stream(syslog.level.LOG_INFO, syslog.facility.LOG_LOCAL4)
+}));
 
 // online status
 app.get('/online', function(req, res, next) {
