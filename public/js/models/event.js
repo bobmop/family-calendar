@@ -1,9 +1,11 @@
 define([
     "backbone",
-    "moment"
+    "moment",
+    "../helpers/eventicon"
 ], function(
     Backbone,
-    moment
+    moment,
+    eventicon
 ) {
     return Backbone.Model.extend({
         parse: function(data) {
@@ -35,6 +37,8 @@ define([
             }
 
             data.timestamp = moment(data.start).format("x");
+
+            data.icon = eventicon(data.summary);
 
             return data;
         }

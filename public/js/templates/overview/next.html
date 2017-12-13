@@ -22,7 +22,12 @@ if (events.length) {
                     <%= moment(event.get("start")).format("HH:mm") %> - <%= moment(event.get("end")).format("HH:mm") %>
                 </div>
             <% } %>
-            <div class="summary"><%- event.get("summary") %></div>
+            <div class="summary">
+                <% if (event.get("icon")) { %>
+                    <i class="fa fa-<%= event.get("icon") %>"></i>
+                    <% } %>
+                <%- event.get("summary") %>
+            </div>
         </div>
         <% }) %>
 
