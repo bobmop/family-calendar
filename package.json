@@ -24,7 +24,7 @@
     "express-livereload": "0.0.24",
     "google-auth-library": "~0.9.6",
     "googleapis": "~2.1.5",
-    "morgan": "~1.6.1",
+    "morgan": "~1.9.1",
     "request": "^2.69.0"
   },
   "dependencies": {
