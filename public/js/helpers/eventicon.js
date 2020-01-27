@@ -5,7 +5,7 @@ define([
 ) {
     var matchers = [{
         icon: "ambulance",
-        words: [ "doctor", "arzt"]
+        words: [ "doctor", "arzt", "orthopädie"]
     }, {
         icon: "birthday-cake",
         words: [ "birthday", "geburtstag" ]
@@ -13,23 +13,44 @@ define([
         icon: "check-square-o",
         words: [ "test", "prüfung" ]
     }, {
+        icon: "eur",
+        words: ["bezahlen"]
+    }, {
+        icon: "eyedropper",
+        words: ["labor"]
+    }, {
         icon: "glass",
         words: [ "party" ]
     }, {
         icon: "film",
         words: [ "film", "movie", "cinema", "kino"]
     }, {
+        icon: "hand-scissors-o",
+        words: ["friseur", "frisör"]
+    }, {
         icon: "music",
         words: [ "music", "concert", "konzert", "festival" ]
     }, {
+        icon: "newspaper-o",
+        words: ["papier"]
+    }, {
+        icon: "spoon",
+        words: ["brunch", "essen"]
+    }, {
         icon: "suitcase",
-        words: [ "visit", "besuch" ]
+        words: [ "visit", "besuch", "ausflug"]
     }, {
         icon: "sun-o",
         words: [ "urlaub", "holiday"]
     }, {
         icon: "tree",
         words: [ "weihnacht", "christmas" ]
+    }, {
+        icon: "university",
+        words: ["schule", "gymnasium", "universität", "school", "univerity"]
+    }, {
+        icon: "paw",
+        words: ["wild"]
     }];
 
     return function(text) {
