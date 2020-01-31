@@ -12,7 +12,7 @@ if (events.length) {
 
     <div class="events-by-day">
         <div class="date">
-            <%- moment(eventDate, "DD.MM.YYYY").format("DD.MM") %>
+            <%- moment(eventDate, "DD.MM.YYYY").format("ddd, DD.MM") %>
         </div>
 
         <% _.each(eventsByDay, function(event) { %>
