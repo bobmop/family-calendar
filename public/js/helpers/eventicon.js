@@ -47,7 +47,7 @@ define([
         words: [ "weihnacht", "christmas" ]
     }, {
         icon: "university",
-        words: ["schule", "gymnasium", "universität", "school", "univerity"]
+        words: ["schule", "gymnasium", "universität", "school", "univerity", "weiterbildung"]
     }, {
         icon: "paw",
         words: ["wild"]
