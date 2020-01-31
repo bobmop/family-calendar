@@ -36,7 +36,7 @@ label {
 }
 #calendar-today {
     padding: 0 10px;
-    font-size: 36px;
+    font-size: 32px;
 }
 #calendar-today .empty {
     padding-left: 36px;
@@ -66,22 +66,22 @@ label {
 #common .time {
     padding: 0 10px;
     text-align: center;
-    font-size: 72px;
+    font-size: 48px;
 }
 #common .date {
     padding: 0 10px;
     text-align: center;
-    font-size: 36px;
+    font-size: 28px;
 }
 
 #common-weather {
     text-align: center;
 }
 #common-weather .main {
-    font-size: 40px;
+    font-size: 36px;
     text-align: center;
     margin-bottom: 10px;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 #common-weather .main .icon {
     margin-left: 20px;
@@ -89,14 +89,11 @@ label {
 #common-weather .meta {
     color: #888;
     display: inline-block;
-    font-size: 20px;
-    margin-right: 20px;
+    font-size: 24px;
+    margin-right: 4px;
     margin-top: 20px;
 }
 #common-weather .meta .wi {
-    font-size: 40px;
+    font-size: 32px;
     margin-right: 10px;
-}
-#common-weather .meta.wind {
-    width: 100%;
 }
