@@ -1,0 +1,27 @@
+<table>
+    <thead>
+        <tr>
+            <%
+            _.each(entries, function(entry) {
+            %>
+            <th><%- moment(entry.get("dt")).format("HH:mm") %></th>
+            <% }) %>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <%
+        _.each(entries, function(entry) {
+        %>
+            <td><i class="icon wi wi-owm-<%- entry.get("dayTime") %>-<%= entry.get("weather")[0].id %>"></i></td>
+        <% }) %>
+        </tr>
+        <tr>
+            <%
+            _.each(entries, function(entry) {
+            %>
+            <td><%= entry.get("main").temp %><i class="wi wi-celsius"></i></td>
+            <% }) %>
+        </tr>
+    </tbody>
+</table>

@@ -1,11 +1,13 @@
 define([
     "jquery",
     "underscore",
-    "backbone"
+    "backbone",
+    "moment"
 ], function(
     $,
     _,
-    Backbone
+    Backbone,
+    moment
 ) {
     return Backbone.Model.extend({
         url: "/weather",
@@ -15,6 +17,11 @@ define([
             try {
                 data.sys.sunrise = new Date(data.sys.sunrise * 1000);
                 data.sys.sunset = new Date(data.sys.sunset * 1000);
+                data.dt = new Date(data.dt * 1000);
+
+                data.dayTime = moment(data.dt).isBetween(data.sys.sunrise, data.sys.sunset) ? "day" : "night";
+
+                data.main.temp = Number.parseFloat(data.main.temp).toFixed(1);
 
                 return data;
             } catch (e) {

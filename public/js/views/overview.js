@@ -3,22 +3,26 @@ define([
     "backbone",
     "collections/calendars",
     "collections/events",
+    "collections/forecast",
     "models/weather",
     "views/overview/today",
     "views/overview/next",
     "views/overview/datetime",
     "views/overview/weather",
+    "views/overview/forecast",
     "text!templates/overview.html"
 ], function(
     _,
     Backbone,
     Calendars,
     Events,
+    Forecast,
     Weather,
     TodayView,
     NextView,
     DateTimeView,
     WeatherView,
+    ForecastView,
     tpl
 ) {
     return Backbone.View.extend({
@@ -39,6 +43,8 @@ define([
 
             this.weather = new Weather();
 
+            this.forecast = new Forecast();
+
             this.todayView = new TodayView({
                 collection: this.events
             });
@@ -48,6 +54,9 @@ define([
             this.dateTimeView = new DateTimeView();
             this.weatherView = new WeatherView({
                 model: this.weather
+            });
+            this.forecastView = new ForecastView({
+                collection: this.forecast
             });
         },
 
@@ -66,12 +75,16 @@ define([
 
             this.$("#common-datetime").html(this.dateTimeView.render().$el);
             this.$("#common-weather").html(this.weatherView.render().$el);
+            this.$("#common-forecast").html(this.forecastView.render().$el);
 
             // get all calendars
             this.calendars.fetch();
 
             // get current weather
             this.weather.fetch();
+
+            // get forecast
+            this.forecast.fetch();
 
             return this;
         }
