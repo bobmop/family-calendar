@@ -99,6 +99,8 @@ label {
 }
 #common-forecast table {
     width: 100%;
+    margin-top: 40px;
+    font-size: 18px;
 }
 #common-forecast td {
     text-align: center;
